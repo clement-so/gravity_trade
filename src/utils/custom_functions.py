@@ -50,3 +50,21 @@ def label_political_entity(entry):
         return 0
     else :
         return 1
+
+def prepare_gdp_file(path_to_data, gdp_filename): 
+    """Refactofing file.
+
+    Args:
+        path_to_data (_type_): _description_
+        gdp_filename (_type_): _description_
+    """
+    gdp1 = pd.read_csv(os.path.join(path_to_data, gdp_filename))
+    gdp1 = gdp1[gdp1["Series Name"] == "GDP (current US$)"]
+    gdp1.rename(columns=mapping_years, inplace=True)
+    gdp1 = gdp1.drop(columns=['Country Name','Series Name', 'Series Code'])
+    gdp1 = gdp1.set_index('Country Code')
+    gdp1 = gdp1.stack().reset_index()
+    gdp1.rename(columns = {'level_1':'year', 0:'gdp'}, inplace=True)
+    gdp1['Key'] = gdp1['Country Code'] + '_' + gdp1['year'].astype(str)
+    
+    return gdp1
