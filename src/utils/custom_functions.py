@@ -16,7 +16,10 @@ def generate_descriptive_analysis(df : pd.DataFrame, output_filename: str) :
 
     # Save the report as an HTML file
     path_to_save = os.path.join(r"./reports", output_filename + ".html")
-    profile.to_file(path_to_save)
+    try:
+        profile.to_file(path_to_save)
+    except: 
+         profile.to_file('/Users/clement/Desktop/ULB/Doctorat/ECARES M2/Advanced topics in Economics/Project/gravity_trade/data' + output_filename)
 
 def label_sent_analysis(entry):
     
