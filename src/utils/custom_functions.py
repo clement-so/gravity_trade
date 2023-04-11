@@ -22,13 +22,6 @@ def generate_descriptive_analysis(df : pd.DataFrame, output_filename: str) :
          profile.to_file('/Users/clement/Desktop/ULB/Doctorat/ECARES M2/Advanced topics in Economics/Project/gravity_trade/data' + output_filename)
 
 def label_sent_analysis(entry):
-    
-    if entry > 0:
-        return 1
-    else :
-        return 0
-
-def label_sent_analysis(entry):
     """This function check if a tweet is positive, or not. 
     If positive, it returns 1.
     Args:
@@ -49,7 +42,7 @@ def label_political_entity(entry):
     Returns:
         Boolean: 1 if positive, 0 otherwise.
     """
-    if not entry:
+    if entry == 'nan' :
         return 0
     else :
         return 1
